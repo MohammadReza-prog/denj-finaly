@@ -403,32 +403,32 @@ body {
 }
 /* استایل پایه برای منوی باز شده */
 .navbar-collapse.show {
-  background-color: #ffffff !important; /* سفید جامد */
-  backdrop-filter: none !important; /* غیرفعال کردن افکت محو */
-  padding: 15px;
-  margin-top: 10px;
+  /* background-color: #ffffff !important; سفید جامد */
+  /* backdrop-filter: none !important; غیرفعال کردن افکت محو */
+  /* padding: 15px; */
+  /* margin-top: 10px; */
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* استایل متن و آیتم‌ها در لایت مود */
 .navbar-collapse.show .nav-link {
-  color: #000000 !important; /* متن سیاه */
-  font-weight: 500;
-  padding: 10px 15px;
-  margin: 5px 0;
+  /* color: #000000 !important; متن سیاه */
+  /* font-weight: 500; */
+  /* padding: 10px 15px; */
+  /* margin: 5px 0; */
   border-radius: 5px;
-  transition: all 0.3s ease;
+  transition: all cubic-bezier(1, 0, 0, 1) ease;
 }
 
 .navbar-collapse.show .nav-link:hover,
 .navbar-collapse.show .nav-link:focus {
-  background-color: rgba(0, 0, 0, 0.05) !important; /* هایلایت هنگام هاور */
+  /* background-color: rgba(0, 0, 0, 0.05) !important; هایلایت هنگام هاور */
   color: #000000 !important;
 }
 
 .navbar-collapse.show .nav-link.active {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+  /* background-color: rgba(0, 0, 0, 0.1) !important; */
   font-weight: 600;
 }
 
@@ -443,15 +443,16 @@ body {
 }
 /* تم تاریک - اختیاری */
 [data-theme="dark"] .navbar-collapse.show {
-  background-color: #212529 !important;
+  /* background-color: #212529 !important; */
 }
+
 
 [data-theme="dark"] .navbar-collapse.show .nav-link {
   color: #f8f9fa !important;
 }
 
 [data-theme="dark"] .navbar-collapse.show .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+ car */
 }
 /* استایل پایه برای دکمه تغییر تم */
 #themeToggle {
@@ -649,7 +650,7 @@ body {
 .carousel-item {
   height: 80vh;
   min-height: 500px;
-  max-height: 600px;
+  max-height: 500px;
   background: #000;
 }
 
