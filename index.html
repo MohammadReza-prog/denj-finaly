@@ -15,7 +15,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
 
   <!-- فونت Dana -->
-  <link href="https://cdn.fontcdn.ir/Font/Persian/Dana/Dana.css" rel="stylesheet">
+  <!-- تغییر لینک فونت Dana به این صورت -->
+<link href="https://cdn.rawgit.com/rastikerdar/vazir-font/v26.0.2/dist/font-face.css" rel="stylesheet">
 
   <!-- آیکن‌های فونت آسام -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,14 +24,20 @@
 
   <!-- استایل شخصی -->
   <style>
-    @font-face {
-      font-family: Denj;
-      src: url("font/Ragam.ttf");
-    }
-    @font-face {
-      font-family: iran;
-      src: url("font/Iranian\ Sans.ttf");
-    }
+    /* تغییر تعریف فونت‌ها به این صورت */
+@font-face {
+  font-family: 'Denj';
+  src: url('./font/Ragam.ttf') format('truetype'),
+       url('./font/Ragam.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'iran';
+  src: url('./font/Iranian-Sans.ttf') format('truetype'),
+       url('./font/Iranian-Sans.woff') format('woff');
+  font-display: swap;
+}
     .denj{
       font-family: Denj;
     }
@@ -174,6 +181,7 @@
       transition: all 0.3s;
       position: relative;
       padding-left: 50px;
+      
     }
     
     .navbar-brand-goldoon:hover::before {
@@ -188,6 +196,7 @@
       padding: 10px 15px !important;
       position: relative;
       transition: all 0.3s;
+      ;
     }
     
     .nav-link-goldoon::after {
@@ -364,6 +373,51 @@
       background: var(--input-bg);
       color: var(--text-color);
     }
+    .search-results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+.search-result-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--input-border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.search-result-item:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item .category {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  display: block;
+}
+.highlight-item {
+  animation: highlight 2s ease;
+  box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+@keyframes highlight {
+  0% { box-shadow: 0 0 0 0 var(--primary-color); }
+  50% { box-shadow: 0 0 0 10px rgba(111, 78, 55, 0.3); }
+  100% { box-shadow: 0 0 0 0 var(--primary-color); }
+}
     
     .search-input:focus {
       border-color: var(--primary-color);
@@ -476,8 +530,9 @@
   animation: fadeIn 0.6s ease-out forwards;
   /* اندازه ثابت برای همه آیتم‌ها */
   width: 100%;
-  height: 400px;
+  height: auto;
   max-width: 300px; /* اندازه نرمال */
+  max-height: 450px;
   
   margin: 0 auto;
   margin-bottom: 20px;
@@ -490,7 +545,8 @@
  */
     
     @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
     }
     
     .menu-item:nth-child(odd) { animation-delay: 0.1s; }
@@ -503,7 +559,8 @@
     
     .menu-item img {
       width: 100%;
-      height: 65%;
+      height: auto !important;
+      aspect-ratio: 1/1;
       object-fit: cover;
       transition: transform 0.5s;
       border-bottom: 1px solid var(--input-border);
@@ -854,12 +911,12 @@
       
       <!-- جستجو -->
       <div class="search-container mb-5">
-      
-        <input type="text" id="searchInput" class="search-input" placeholder="جستجوی نوشیدنی یا غذا...">
-        
-        
-        
-      </div>
+  <div class="position-relative">
+    <i class="fas fa-search search-icon"></i>
+    <input type="text" id="searchInput" class="search-input" placeholder="جستجوی نوشیدنی یا غذا...">
+    <div id="searchResults" class="search-results-dropdown"></div>
+  </div>
+</div>
       
       <!-- فیلتر قیمت -->
       <!-- <div class="price-filter">
@@ -1279,46 +1336,38 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        <!-- عنوان بخش -->
         <h2 class="text-center mb-5 fw-bold">نظرات شما</h2>
         
         <!-- لیست نظرات -->
-        <div class="comments-list mb-5">
-          <!-- نظر ۱ -->
-          <div class="card mb-4 border-0 shadow-sm">
-            <div class="card-body p-4">
-              <div class="d-flex align-items-center mb-3">
-                <div class="user-avatar me-3">
-                  <span>ع</span>
-                </div>
-                <div>
-                  <h5 class="mb-0">علی محمدی</h5>
-                  <small class="text-muted">۱۴۰۲/۰۵/۱۵ - ۱۴:۳۰</small>
-                </div>
-              </div>
-              <p class="mb-0">طراحی سایت بسیار عالی و حرفه‌ای بود. ممنون از زحمات شما</p>
-            </div>
-          </div>
+        <div class="comments-list mb-5" id="comments-container">
+          <!-- نظرات به صورت داینامیک لود می‌شوند -->
         </div>
         
+        <!-- پیجینیشن -->
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center mt-4" id="pagination">
+            <!-- صفحات به صورت داینامیک ساخته می‌شوند -->
+          </ul>
+        </nav>
+        
         <!-- فرم ارسال نظر -->
-        <div class="comment-form">
+        <div class="comment-form mt-5">
           <div class="card border-0 shadow">
             <div class="card-body p-4">
               <h4 class="mb-4 text-center">نظر خود را ثبت کنید</h4>
-              <form>
+              <form id="comment-form">
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <input type="text" class="form-control py-3" placeholder="نام شما">
+                    <input type="text" class="form-control py-3" placeholder="نام شما" required>
                   </div>
                   <div class="col-md-6">
-                    <input type="email" class="form-control py-3" placeholder="ایمیل شما">
+                    <input type="email" class="form-control py-3" placeholder="ایمیل شما (اختیاری)">
                   </div>
                   <div class="col-12">
-                    <textarea class="form-control py-3" rows="5" placeholder="نظر شما"></textarea>
+                    <textarea class="form-control py-3" rows="5" placeholder="نظر شما" required></textarea>
                   </div>
                   <div class="col-12 text-center">
-                    <button class="btn px-5 py-3" type="button">ارسال نظر</button>
+                    <button class="btn px-5 py-3" type="submit">ارسال نظر</button>
                   </div>
                 </div>
               </form>
@@ -1783,6 +1832,266 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+// داده‌های نمونه برای نظرات
+const sampleComments = [
+  {id: 1, name: "علی محمدی", date: "۱۴۰۲/۰۵/۱۵ - ۱۴:۳۰", text: "طراحی سایت بسیار عالی و حرفه‌ای بود. ممنون از زحمات شما"},
+  {id: 2, name: "مریم رضایی", date: "۱۴۰۲/۰۵/۱۰ - ۱۰:۱۵", text: "قهوه‌های شما عالی هستن، مخصوصاً اسپرسو"},
+  {id: 3, name: "رضا حسینی", date: "۱۴۰۲/۰۵/۰۸ - ۱۸:۴۵", text: "فضای کافه بسیار دنج و آرامش‌بخش است"},
+  {id: 4, name: "سارا کریمی", date: "۱۴۰۲/۰۵/۰۵ - ۱۲:۲۰", text: "پاستا پستو رو خیلی دوست داشتم، مزه‌اش عالی بود"},
+  {id: 5, name: "امیر عباسی", date: "۱۴۰۲/۰۵/۰۳ - ۱۶:۱۰", text: "خدمات عالی و پرسنل خوش‌برخورد"},
+  {id: 6, name: "نازنین احمدی", date: "۱۴۰۲/۰۴/۲۸ - ۲۰:۳۰", text: "دسر چیزکیک توت فرنگی عالی بود"},
+  {id: 7, name: "محمد جوادی", date: "۱۴۰۲/۰۴/۲۵ - ۱۱:۴۵", text: "برای کار کردن فضای خوبی داره، وایفای سریع"},
+  {id: 8, name: "فاطمه موسوی", date: "۱۴۰۲/۰۴/۲۰ - ۱۴:۱۵", text: "قیمت‌ها منصفانه و کیفیت عالی"},
+  {id: 9, name: "حسین نوروزی", date: "۱۴۰۲/۰۴/۱۸ - ۱۹:۲۰", text: "برگر ویژه‌تون واقعاً خاصه، پیشنهاد می‌کنم"},
+  {id: 10, name: "لیلا محمدی", date: "۱۴۰۲/۰۴/۱۵ - ۱۳:۵۰", text: "نوشیدنی‌های سردشون تو هوای گرم عالین"},
+  {id: 11, name: "پویا رضوی", date: "۱۴۰۲/۰۴/۱۰ - ۱۷:۳۰", text: " شب‌های پنجشنبه خیلی خوبه"},
+  {id: 12, name: "سمیرا کرمانی", date: "۱۴۰۲/۰۴/۰۸ - ۱۲:۱۰", text: "سالاد سزارشون تازه و خوشمزست"},
+  {id: 13, name: "امید حسنی", date: "۱۴۰۲/۰۴/۰۵ - ۱۵:۴۵", text: "منوی دیجیتال خیلی ایده جالبی بود"},
+  {id: 14, name: "نرگس فلاحی", date: "۱۴۰۲/۰۴/۰۱ - ۲۰:۰۰", text: "فضای بیرونی کافه در بهار فوق‌العاده‌ست"},
+  {id: 15, name: "کامران یوسفی", date: "۱۴۰۲/۰۳/۲۸ - ۱۸:۲۰", text: "پنیر سوخاری رو حتما امتحان کنید"}
+];
+
+// تنظیمات پیجینیشن
+const commentsPerPage = 5;
+let currentPage = 1;
+
+// تابع نمایش نظرات
+function displayComments(page) {
+  const start = (page - 1) * commentsPerPage;
+  const end = start + commentsPerPage;
+  const paginatedComments = sampleComments.slice(start, end);
+  
+  const container = document.getElementById('comments-container');
+  container.innerHTML = '';
+  
+  paginatedComments.forEach(comment => {
+    const commentElement = document.createElement('div');
+    commentElement.className = 'card mb-4 border-0 shadow-sm comment-card';
+    commentElement.innerHTML = `
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <div class="user-avatar me-3">
+            <span>${comment.name.charAt(0)}</span>
+          </div>
+          <div>
+            <h5 class="mb-0">${comment.name}</h5>
+            <small class="text-muted">${comment.date}</small>
+          </div>
+        </div>
+        <p class="mb-0">${comment.text}</p>
+      </div>
+    `;
+    container.appendChild(commentElement);
+  });
+}
+
+// تابع ایجاد پیجینیشن
+function setupPagination() {
+  const pagination = document.getElementById('pagination');
+  const pageCount = Math.ceil(sampleComments.length / commentsPerPage);
+  
+  pagination.innerHTML = '';
+  
+  // دکمه قبلی
+  const prevBtn = document.createElement('li');
+  prevBtn.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+  prevBtn.innerHTML = `
+    <a class="page-link" href="#" aria-label="Previous" data-page="${currentPage - 1}">
+      <span aria-hidden="true">&raquo;</span>
+    </a>
+  `;
+  pagination.appendChild(prevBtn);
+  
+  // صفحات
+  for (let i = 1; i <= pageCount; i++) {
+    const pageItem = document.createElement('li');
+    pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+    pageItem.innerHTML = `<a class="page-link" href="#" data-page="${i}">${i}</a>`;
+    pagination.appendChild(pageItem);
+  }
+  
+  // دکمه بعدی
+  const nextBtn = document.createElement('li');
+  nextBtn.className = `page-item ${currentPage === pageCount ? 'disabled' : ''}`;
+  nextBtn.innerHTML = `
+    <a class="page-link" href="#" aria-label="Next" data-page="${currentPage + 1}">
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  `;
+  pagination.appendChild(nextBtn);
+}
+
+// رویداد کلیک برای پیجینیشن
+document.getElementById('pagination').addEventListener('click', (e) => {
+  e.preventDefault();
+  if (e.target.tagName === 'A') {
+    currentPage = parseInt(e.target.dataset.page);
+    displayComments(currentPage);
+    setupPagination();
+    window.scrollTo({
+      top: document.getElementById('comments').offsetTop - 100,
+      behavior: 'smooth'
+    });
+  }
+});
+
+// فرم ارسال نظر
+document.getElementById('comment-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const name = form.querySelector('input[type="text"]').value;
+  const text = form.querySelector('textarea').value;
+  
+  // ایجاد نظر جدید
+  const newComment = {
+    id: sampleComments.length + 1,
+    name: name,
+    date: new Date().toLocaleDateString('fa-IR') + ' - ' + new Date().toLocaleTimeString('fa-IR').substring(0,5),
+    text: text
+  };
+  
+  sampleComments.unshift(newComment); // اضافه به ابتدای آرایه
+  currentPage = 1; // بازگشت به صفحه اول
+  displayComments(currentPage);
+  setupPagination();
+  form.reset();
+  
+  // اسکرول به بالا
+  window.scrollTo({
+    top: document.getElementById('comments').offsetTop - 50,
+    behavior: 'smooth'
+  });
+});
+
+// مقداردهی اولیه
+document.addEventListener('DOMContentLoaded', () => {
+  displayComments(currentPage);
+  setupPagination();
+});
+// این کد را به اسکریپت موجود اضافه کنید
+document.addEventListener('DOMContentLoaded', function() {
+  const thumbnailsContainer = document.querySelector('.story-thumbnails');
+  const thumbRow = document.querySelector('.thumb-row');
+  const thumbs = document.querySelectorAll('.story-thumb');
+
+  // اگر بیش از 4 تصویر وجود داشت
+  if (thumbs.length > 4) {
+    // 1. اضافه کردن اسکرول افقی
+    thumbnailsContainer.style.overflowX = 'auto';
+    thumbnailsContainer.style.whiteSpace = 'nowrap';
+    
+    // 2. تنظیم عرض سطر برای اسکرول
+    thumbRow.style.display = 'inline-flex';
+    thumbRow.style.flexWrap = 'nowrap';
+    thumbRow.style.width = 'auto';
+    
+    // 3. تنظیم فاصله بین تصاویر
+    thumbRow.style.gap = '15px';
+    
+    // 4. غیرفعال کردن flex معمولی
+    thumbRow.classList.remove('row');
+    thumbRow.classList.remove('g-3');
+    
+    // 5. تنظیم استایل برای آیتم‌ها
+    document.querySelectorAll('.story-thumb').forEach(thumb => {
+      thumb.style.display = 'inline-block';
+      thumb.style.float = 'none';
+      thumb.style.marginRight = '15px';
+    });
+  }
+});
+// داده محصولات
+const menuItemsData = [
+  { name: "پنیر سوخاری", category: "appetizer", desc: "پنیر موزارلا با پوشش طلایی و ترد" },
+  { name: "اسپاگتی بولونزه", category: "spaghetti", desc: "با سس گوشت رازدار" },
+  { name: "چیزکیک توت فرنگی", category: "dessert", desc: "با توت فرنگی تازه" },
+  { name: "پاستا پستو", category: "pasta", desc: "با سس ریحان و پنیر پارمزان" },
+  { name: "برگر ویژه", category: "burger", desc: "با سیب زمینی سرخ کرده" },
+  { name: "پیتزا مخلوط", category: "pizza", desc: "با پپرونی، قارچ و زیتون" },
+  { name: "استیک فیله", category: "steak", desc: "با سس قارچ و سبزیجات" },
+  { name: "مرغ سوخاری", category: "plate", desc: "با آرد سوخاری مخصوص" },
+  { name: "چلوکباب", category: "iranian", desc: "با زعفران و سماق" },
+  { name: "آیس شیک وانیلی", category: "ice", desc: "با خامه تازه" },
+  { name: "اسموتی میوه‌ای", category: "smoothie", desc: "ترکیب توت فرنگی و موز" },
+  { name: "ماکتل تابستانی", category: "mocktail", desc: "ترکیب میوه‌های استوایی" }
+];
+
+// جستجو
+document.getElementById('searchInput').addEventListener('input', function() {
+  const searchTerm = this.value.trim().toLowerCase();
+  const resultsContainer = document.getElementById('searchResults');
+  
+  if (searchTerm.length < 2) {
+    resultsContainer.style.display = 'none';
+    return;
+  }
+  
+  const filteredItems = menuItemsData.filter(item => 
+    item.name.toLowerCase().includes(searchTerm) || 
+    item.desc.toLowerCase().includes(searchTerm)
+  );
+  
+  if (filteredItems.length > 0) {
+    resultsContainer.innerHTML = filteredItems.map(item => `
+      <div class="search-result-item" 
+           data-category="${item.category}"
+           onclick="filterToItem('${item.category}','${item.name}')">
+        <strong>${item.name}</strong>
+        <span class="category">${getCategoryName(item.category)}</span>
+      </div>
+    `).join('');
+    resultsContainer.style.display = 'block';
+  } else {
+    resultsContainer.innerHTML = '<div class="search-result-item">موردی یافت نشد</div>';
+    resultsContainer.style.display = 'block';
+  }
+});
+
+// نام فارسی دسته‌بندی
+function getCategoryName(category) {
+  const categories = {
+    appetizer: "پیش غذا",
+    spaghetti: "اسپاگتی",
+    dessert: "دسر",
+    salad: "سالاد",
+    pasta: "پاستا",
+    burger: "برگر",
+    pizza: "پیتزا",
+    steak: "استیک",
+    plate: "بشقاب",
+    iranian: "ایرانی",
+    ice: "آیس",
+    shake: "شیک",
+    smoothie: "اسموتی",
+    mocktail: "ماکتل"
+  };
+  return categories[category] || category;
+}
+
+// هدایت به محصول
+function filterToItem(category, name) {
+  document.querySelector(`.category-tabs-vertical button[data-filter="${category}"]`).click();
+  
+  setTimeout(() => {
+    const items = document.querySelectorAll('.menu-item');
+    items.forEach(item => {
+      if (item.querySelector('a').textContent.includes(name)) {
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        item.classList.add('highlight-item');
+        setTimeout(() => item.classList.remove('highlight-item'), 2000);
+      }
+    });
+    document.getElementById('searchResults').style.display = 'none';
+  }, 300);
+}
+
+// بستن دراپ‌داون
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.search-container')) {
+    document.getElementById('searchResults').style.display = 'none';
+  }
+});
+
   
 </script>
 
