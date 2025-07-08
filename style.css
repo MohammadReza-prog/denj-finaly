@@ -1,4 +1,20 @@
 body {
+  :root {
+  --primary-color: #6f4e37;
+  --secondary-color: #c4a484;
+  --text-color: #3a2512;
+  --text-light: #f8f1e9;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #e0e0e0;
+}
+
+[data-theme="dark"] {
+  --text-color: #ffffff;
+  --card-bg: #2d2d2d;
+  --input-bg: #2d2d2d;
+  --input-border: #444;
+}
   font-family: 'Vazirmatn', sans-serif;
   line-height: 1.8;
   background-color: #fff;
@@ -844,65 +860,123 @@ body {
     border-width: 2px;
   }
 }
-/* استایل پایه بخش نظرات */
-.comments-section {
+ /* استایل بخش نظرات */
+   /* استایل بخش نظرات */
+.comments-card {
   transition: all 0.5s ease;
-}
-
-/* حالت لایت */
-.comments-list,
-.comment-form .card {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-}
-
-.comment-form input,
-.comment-form textarea {
-  background-color: var(--input-bg);
-  color: var(--text-color);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-radius: 10px;
   border: 1px solid var(--input-border);
 }
 
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  color: white;
+.comment-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  padding: 0 10px;
+}
+
+.user-info {
+  border-top: 1px solid var(--input-border);
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+/* استایل امتیازدهی با فنجان قهوه */
+.coffee-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.coffee-rating input {
+  display: none;
+}
+
+.coffee-rating label {
+  color: var(--input-border);
+  cursor: pointer;
+  font-size: 1.8rem;
+  transition: all 0.2s ease;
+}
+
+.coffee-rating label:hover,
+.coffee-rating input:checked ~ label,
+.coffee-rating input:hover ~ label {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* نمایش امتیاز */
+.rating-display .stars {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  display: inline-flex;
+  gap: 5px;
+}
+
+/* استایل فرم */
+.comment-form-card {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border: 1px solid var(--input-border);
+}
+
+.comment-form-card .card-header {
+  font-family: 'Denj', sans-serif;
+  font-size: 1.3rem;
+}
+
+/* ناوبری نظرات */
+.comments-navigation .btn {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  padding: 8px 20px;
+}
+
+.comments-navigation .btn:hover {
+  background: var(--primary-color);
+  color: var(--text-light);
+}
+
+.comments-navigation .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: transparent !important;
+  color: var(--primary-color) !important;
+}
+
+.page-indicator {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-/* حالت دارک */
-[data-theme="dark"] .comments-list,
-[data-theme="dark"] .comment-form .card {
-  background-color: var(--card-bg);
-  color: var(--text-color);
+/* انیمیشن‌ها */
+.animate-comment {
+  animation: fadeInUp 0.5s ease-out;
 }
 
-[data-theme="dark"] .comment-form input,
-[data-theme="dark"] .comment-form textarea {
-  background-color: var(--input-bg);
-  color: var(--text-color);
-  border-color: var(--input-border);
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-[data-theme="dark"] .user-avatar {
-  background-color: var(--secondary-color);
+/* دکمه ارسال */
+.btn-primary {
+  transition: all 0.3s ease;
 }
 
-/* دکمه ارسال نظر */
-.comment-form button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  transition: all 0.3s;
-}
-
-.comment-form button:hover {
-  background: var(--secondary-color);
+.btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(111, 78, 55, 0.3);
 }
