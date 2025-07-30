@@ -1,198 +1,148 @@
+ document.addEventListener('DOMContentLoaded', function() {
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      
+      // تنظیم تم اولیه با اولویت: localStorage > سیستم کاربر > پیش‌فرض
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+      
+      document.documentElement.setAttribute('data-theme', initialTheme);
+      updateIcon(initialTheme);
+      
+      // تغییر آیکون
+      function updateIcon(theme) {
+        themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      }
+      
+      // تغییر تم
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateIcon(newTheme);
+      });
 
+    
+    });
+    
 document.addEventListener('DOMContentLoaded', function() {
-  // داده‌های اولیه
+  // داده‌های اولیه نظرات
   let comments = [
     {
       id: 1,
       name: "محمد رضایی",
       gender: "male",
-      rating: 3,
-      comment: "این کافه فضای بسیار دنج و آرامی دارد. قهوه‌هایشان عالی است و پرسنل خوش‌برخورد. حتماً دوباره می‌آیم!",
+      rating: 4,
+      comment: "فضای کافه بسیار عالی و دنج است. پیشنهاد می‌کنم.",
       date: "۲ روز پیش"
     },
     {
       id: 2,
       name: "فاطمه محمدی",
       gender: "female",
-      rating: 4,
-      comment: "بهترین کافه در شهر! دسرهایشان بی‌نظیر است و فضای داخلی بسیار زیبا طراحی شده.",
+      rating: 5,
+      comment: "بهترین قهوه شهر رو اینجا خوردم!",
       date: "۱ هفته پیش"
-    },
-    {
-      id: 3,
-      name: "علی حسینی",
-      gender: "male",
-      rating: 2,
-      comment: "قیمت‌ها کمی بالاست اما کیفیت مواد اولیه خوب است. پیشنهاد می‌کنم حتماً پاستا را امتحان کنید.",
-      date: "۲ هفته پیش"
-    },
-    {
-      id: 4,
-      name: "زهرا کریمی",
-      gender: "female",
-      rating: 4,
-      comment: "من هر هفته به این کافه می‌آیم واقعاً عالی است.",
-      date: "۳ هفته پیش"
-    },
-    {
-      id: 5,
-      name: "رضا نوروزی",
-      gender: "male",
-      rating: 3,
-      comment: "سرویس سریع و کیفیت خوب. فقط گاهی اوقات شلوغ می‌شود و باید منتظر بمانید.",
-      date: "۱ ماه پیش"
     }
   ];
 
-  let currentPosition = 0; // موقعیت فعلی در آرایه
+  let currentPosition = 0;
 
-  // نمایش نظر فعلی
   function displayCurrentComment() {
+    const commentContainer = document.querySelector('.comments-card .card-body');
+    if (!commentContainer) return;
+
     if (comments.length === 0) {
-      document.querySelector('.comments-card').innerHTML = '<p>هنوز نظری ثبت نشده است.</p>';
+      commentContainer.innerHTML = '<p class="text-center py-3">هنوز نظری ثبت نشده است.</p>';
       return;
     }
 
     const comment = comments[currentPosition];
-    const commentCard = document.querySelector('.comments-card');
-    
-    // انیمیشن
-    commentCard.classList.remove('animate-comment');
-    void commentCard.offsetWidth;
-    commentCard.classList.add('animate-comment');
-    
-    // نمایش امتیاز
-    const cupsHtml = Array(5).fill().map((_, i) => 
-      i < comment.rating 
-        ? '<i class="fas fa-coffee"></i>' 
-        : '<i class="far fa-coffee"></i>'
-    ).join('');
-    
-    document.querySelector('.rating-display .stars').innerHTML = cupsHtml;
-    document.querySelector('.rating-display small').textContent = `(امتیاز ${comment.rating} از 5)`;
-    
-    // نمایش متن نظر
-    document.querySelector('.comment-text').textContent = comment.comment;
-    
-    // نمایش اطلاعات کاربر
-    const userAvatar = comment.gender === 'male' 
-      ? '<i class="fas fa-male fa-3x" style="color: var(--primary-color);"></i>'
-      : '<i class="fas fa-female fa-3x" style="color: var(--primary-color);"></i>';
-    
-    document.querySelector('.user-info .avatar').innerHTML = userAvatar;
-    document.querySelector('.user-info h6').textContent = comment.name;
-    document.querySelector('.user-info small').textContent = comment.date;
-    
-    // به‌روزرسانی وضعیت دکمه‌ها
-    document.querySelector('.prev-comment').disabled = currentPosition === 0;
-    document.querySelector('.next-comment').disabled = currentPosition === comments.length - 1;
-    
-    // به‌روزرسانی شماره نظر
-    document.querySelector('.page-indicator').textContent = 
-      `نظر ${currentPosition + 1} از ${comments.length}`;
+    commentContainer.innerHTML = `
+      <div class="rating-display mb-3">
+        <div class="stars">
+          ${'<i class="fas fa-coffee"></i>'.repeat(comment.rating)}
+          ${'<i class="far fa-coffee"></i>'.repeat(5 - comment.rating)}
+        </div>
+        <small class="ms-2">(امتیاز ${comment.rating} از 5)</small>
+      </div>
+      <p class="comment-text mb-3">${comment.comment}</p>
+      <div class="user-info d-flex align-items-center">
+        <div class="avatar me-3">
+          <i class="fas fa-${comment.gender === 'male' ? 'male' : 'female'} fa-2x"></i>
+        </div>
+        <div>
+          <h6 class="mb-0">${comment.name}</h6>
+          <small class="text-muted">${comment.date}</small>
+        </div>
+      </div>
+    `;
+    updatePaginationButtons();
   }
 
-  // تنظیم رویدادهای دکمه‌ها
-  function setupPagination() {
-    document.querySelector('.prev-comment').addEventListener('click', () => {
-      if (currentPosition > 0) {
-        currentPosition--;
-        displayCurrentComment();
+  function updatePaginationButtons() {
+    const prevBtn = document.querySelector('.prev-comment');
+    const nextBtn = document.querySelector('.next-comment');
+    const indicator = document.querySelector('.page-indicator');
+    
+    if (prevBtn && nextBtn && indicator) {
+      prevBtn.disabled = currentPosition === 0;
+      nextBtn.disabled = currentPosition === comments.length - 1;
+      indicator.textContent = `نظر ${currentPosition + 1} از ${comments.length}`;
+    }
+  }
+
+  const commentForm = document.getElementById('commentForm');
+  if (commentForm) {
+    commentForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name')?.value.trim();
+      const commentText = document.getElementById('comment')?.value.trim();
+      const rating = document.querySelector('input[name="rating"]:checked')?.value;
+      const gender = document.querySelector('input[name="gender"]:checked')?.value;
+      
+      if (!name || !commentText || !rating || !gender) {
+        alert('لطفاً تمام فیلدها را پر کنید!');
+        return;
       }
-    });
-    
-    document.querySelector('.next-comment').addEventListener('click', () => {
-      if (currentPosition < comments.length - 1) {
-        currentPosition++;
-        displayCurrentComment();
-      }
+      
+      comments.unshift({
+        id: comments.length + 1,
+        name,
+        gender,
+        rating: parseInt(rating),
+        comment: commentText,
+        date: 'همین الان'
+      });
+      
+      currentPosition = 0;
+      displayCurrentComment();
+      this.reset();
     });
   }
 
-  // ارسال نظر جدید
-  document.getElementById('commentForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value.trim();
-    const comment = document.getElementById('comment').value.trim();
-    const gender = document.querySelector('input[name="gender"]:checked').value;
-    const rating = document.querySelector('input[name="rating"]:checked')?.value || 0;
-    
-    // اعتبارسنجی
-    if (!name || !comment || !rating) {
-      showAlert('لطفاً تمام فیلدها را پر کنید و امتیاز دهید', 'danger');
-      return;
+  const prevBtn = document.querySelector('.prev-comment');
+  const nextBtn = document.querySelector('.next-comment');
+  
+  if (prevBtn) prevBtn.addEventListener('click', () => {
+    if (currentPosition > 0) {
+      currentPosition--;
+      displayCurrentComment();
     }
-    
-    if (name.length < 3) {
-      document.getElementById('name').classList.add('is-invalid');
-      return;
-    }
-    
-    if (comment.length < 10) {
-      document.getElementById('comment').classList.add('is-invalid');
-      return;
-    }
-    
-    const newComment = {
-      id: comments.length + 1,
-      name,
-      gender,
-      rating: parseInt(rating),
-      comment,
-      date: 'همین الان'
-    };
-    
-    // اضافه کردن نظر جدید به ابتدای آرایه
-    comments.unshift(newComment);
-    currentPosition = 0; // رفتن به نظر جدید
-    
-    displayCurrentComment();
-    this.reset();
-    
-    showAlert('نظر شما با موفقیت ثبت شد', 'success');
-    
-    // اسکرول به بخش نظرات
-    document.getElementById('comments').scrollIntoView({ behavior: 'smooth' });
   });
-
-  // نمایش پیام
-  function showAlert(message, type) {
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert alert-${type} mt-3 text-center`;
-    alertDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle me-2"></i> ${message}`;
-    
-    const formBody = document.querySelector('.comment-form-card .card-body');
-    const oldAlert = formBody.querySelector('.alert');
-    if (oldAlert) oldAlert.remove();
-    
-    formBody.appendChild(alertDiv);
-    
-    setTimeout(() => {
-      alertDiv.remove();
-    }, 3000);
-  }
-
-  // اعتبارسنجی لحظه‌ای
-  document.getElementById('name').addEventListener('input', function() {
-    if (this.value.length < 3 && this.value.length > 0) {
-      this.classList.add('is-invalid');
-    } else {
-      this.classList.remove('is-invalid');
+  
+  if (nextBtn) nextBtn.addEventListener('click', () => {
+    if (currentPosition < comments.length - 1) {
+      currentPosition++;
+      displayCurrentComment();
     }
   });
 
-  document.getElementById('comment').addEventListener('input', function() {
-    if (this.value.length < 10 && this.value.length > 0) {
-      this.classList.add('is-invalid');
-    } else {
-      this.classList.remove('is-invalid');
-    }
-  });
-
-  // مقداردهی اولیه
   displayCurrentComment();
-  setupPagination();
 });
   const menuItemsData = [
   // پیش غذاها
@@ -661,11 +611,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   
-  sampleComments.unshift(newComment); // اضافه به ابتدای آرایه
-  currentPage = 1; // بازگشت به صفحه اول
-  displayComments(currentPage);
-  setupPagination();
-  form.reset();
+  // sampleComments.unshift(newComment); // اضافه به ابتدای آرایه
+  // currentPage = 1; // بازگشت به صفحه اول
+  // displayComments(currentPage);
+  // setupPagination();
+  // form.reset();
   
   // اسکرول به بالا
   window.scrollTo({

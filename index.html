@@ -24,103 +24,6 @@
   <!-- استایل شخصی -->
   <style>
     /* متغیرهای اصلی (حالت لایت) */
-    :root {
-      --primary-color: #6f4e37;
-      --secondary-color: #c4a484;
-      --bg-color: #f9f9f9;
-      --card-bg: #ffffff;
-      --text-color: #3a2512;
-      --text-light: #f8f1e9;
-      --input-bg: #ffffff;
-      --input-border: #e0e0e0;
-      --navbar-bg: linear-gradient(135deg, #120d08 0%, #6f4e37 100%);
-      --footer-bg: linear-gradient(135deg, #3a2512 0%, #6f4e37 100%);
-    }
-
-    /* متغیرهای حالت دارک */
-    [data-theme="dark"] {
-      --primary-color: #c4a484;
-      --secondary-color: #6f4e37;
-      --bg-color: #1a1a1a;
-      --card-bg: #2d2d2d;
-      --text-color: #ffffff;
-      --text-light: #3a2512;
-      --input-bg: #2d2d2d;
-      --input-border: #444;
-      --navbar-bg: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
-      --footer-bg: linear-gradient(135deg, #2d2d2d 0%, #000 100%);
-    }
-
-    /* اعمال متغیرها */
-    body {
-      font-family: 'Vazirmatn', sans-serif;
-      line-height: 1.8;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* استایل‌های خاص برای حالت دارک */
-    [data-theme="dark"] .comments-section {
-      background-color: var(--card-bg) !important;
-    }
-    
-    [data-theme="dark"] .comments-section .card {
-      background-color: var(--card-bg) !important;
-      border-color: var(--input-border) !important;
-    }
-
-    [data-theme="dark"] .comments-section .text-body,
-    [data-theme="dark"] .comments-section .text-body-secondary {
-      color: var(--text-color) !important;
-    }
-
-    [data-theme="dark"] .comments-section .form-control {
-      background-color: var(--input-bg) !important;
-      color: var(--text-color) !important;
-      border-color: var(--input-border) !important;
-    }
-
-    [data-theme="dark"] .comments-section .btn {
-      background-color: var(--primary-color) !important;
-      color: var(--text-light) !important;
-    }
-
-    /* فونت‌های سفارشی */
-    @font-face {
-      font-family: 'Denj';
-      src: url('./font/Ragam.ttf') format('truetype'),
-           url('./font/Ragam.woff') format('woff');
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'iran';
-      src: url('./font/Iranian-Sans.ttf') format('truetype'),
-           url('./font/Iranian-Sans.woff') format('woff');
-      font-display: swap;
-    }
-
-    .denj {
-      font-family: Denj;
-    }
-
-    /* لودینگ */
-    .coffee-loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: var(--bg-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
 
     /* سایر استایل‌های شما... */
   </style>
@@ -862,35 +765,7 @@
  
     <script src="script.js"></script>
          <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = themeToggle.querySelector('i');
-      
-      // تنظیم تم اولیه با اولویت: localStorage > سیستم کاربر > پیش‌فرض
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-      
-      document.documentElement.setAttribute('data-theme', initialTheme);
-      updateIcon(initialTheme);
-      
-      // تغییر آیکون
-      function updateIcon(theme) {
-        themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-      }
-      
-      // تغییر تم
-      themeToggle.addEventListener('click', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateIcon(newTheme);
-      });
-
-    
-    });
+   
   </script>
 </body>
 </html>
