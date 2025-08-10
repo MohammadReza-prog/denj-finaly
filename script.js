@@ -1,4 +1,13 @@
- document.addEventListener('DOMContentLoaded', function() {
+ // جلوگیری از اسکرول خودکار مرورگر
+history.scrollRestoration = 'manual';
+
+// یا در صورت استفاده از React/Vue
+if (typeof window !== 'undefined') {
+  window.history.scrollRestoration = 'manual';
+}
+ 
+ 
+ .addEventListener('DOMContentLoaded', function() {
       const themeToggle = document.getElementById('themeToggle');
       const themeIcon = themeToggle.querySelector('i');
       
