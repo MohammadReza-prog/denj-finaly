@@ -29,6 +29,30 @@
   </style>
 </head>
 <body>
+  <script>
+    // این کد را در ابتدای <body> یا قبل از بسته شدن </body> قرار دهید
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. فوراً اسکرول را به بالا ببرید
+  window.scrollTo(0, 0);
+  
+  // 2. از ذخیره موقعیت اسکرول توسط مرورگر جلوگیری کنید
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  
+  // 3. هر هش موجود در URL را حذف کنید
+  if (window.location.hash) {
+    history.replaceState(null, null, ' ');
+  }
+  
+  // 4. پس از لود کامل صفحه دوباره موقعیت را چک کنید
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      window.scrollTo(0, 0);
+    }, 100);
+  });
+});
+  </script>
 
   <section id="home">
     

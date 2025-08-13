@@ -1,41 +1,124 @@
- // جلوگیری از اسکرول خودکار مرورگر
-history.scrollRestoration = 'manual';
-
-// یا در صورت استفاده از React/Vue
-if (typeof window !== 'undefined') {
-  window.history.scrollRestoration = 'manual';
-}
- 
- 
- .addEventListener('DOMContentLoaded', function() {
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = themeToggle.querySelector('i');
-      
-      // تنظیم تم اولیه با اولویت: localStorage > سیستم کاربر > پیش‌فرض
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-      
-      document.documentElement.setAttribute('data-theme', initialTheme);
-      updateIcon(initialTheme);
-      
-      // تغییر آیکون
-      function updateIcon(theme) {
-        themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-      }
-      
-      // تغییر تم
-      themeToggle.addEventListener('click', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateIcon(newTheme);
-      });
-
+document.addEventListener('DOMContentLoaded', function() {
+  // جلوگیری از رفتار پیشفرض مرورگر
+  history.scrollRestoration = 'manual';
+  
+  // اگر URL حاوی هش باشد
+  if (window.location.hash) {
+    // حذف هش بدون ریفرش صفحه
+    history.replaceState(null, null, ' ');
     
+    // بازگشت به بالای صفحه
+    setTimeout(function() {
+      window.scrollTo(0, 0);
+    }, 10);
+  }
+  
+  // اطمینان از موقعیت شروع در بالای صفحه
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      window.scrollTo(0, 0);
+    }, 0);
+  });
+});
+// این کد را جایگزین بخش مربوطه کنید:
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle.querySelector('i');
+  
+  // بررسی تم ذخیره شده یا پیشفرض سیستم
+  const savedTheme = localStorage.getItem('theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateIcon(savedTheme);
+  
+  function updateIcon(theme) {
+    themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
+  
+  themeToggle.addEventListener('click', function() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateIcon(newTheme);
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. مدیریت کامنت‌ها
+  function displayComments(page) {
+    const commentsContainer = document.getElementById('comments-container');
+    if (commentsContainer) {
+      // کدهای نمایش کامنت‌ها
+    }
+  }
+
+  // 2. بررسی وجود المنت‌ها قبل از دسترسی
+  const navLinks = document.querySelectorAll('a[href^="#"]');
+  if (navLinks.length > 0) {
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
+  }
+
+  // 3. مدیریت جستجو
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      const searchResults = document.getElementById('searchResults');
+      if (searchResults) {
+        searchResults.style.display = this.value.length > 0 ? 'block' : 'none';
+      }
+    });
+  }
+
+  // 4. مقداردهی اولیه
+  displayComments(1);
+});
+
+// منتظر بمانید تا DOM کاملاً بارگذاری شود
+document.addEventListener('DOMContentLoaded', function() {
+  // 1. تعریف تابع displayComments
+  function displayComments(page) {
+    const commentsContainer = document.getElementById('comments-container');
+    if (commentsContainer) {
+      // کدهای نمایش کامنت‌ها
+      console.log(`نمایش کامنت‌های صفحه ${page}`);
+    } else {
+      console.error('محفظه کامنت‌ها یافت نشد!');
+    }
+  }
+
+  // 2. مدیریت event listeners
+  const clickableElement = document.getElementById('myButton');
+  if (clickableElement) {
+    clickableElement.addEventListener('click', function() {
+      console.log('دکمه کلیک شد!');
+    });
+  }
+
+  // 3. مدیریت استایل عناصر
+  const styledElement = document.querySelector('.element-to-style');
+  if (styledElement) {
+    styledElement.style.display = 'block';
+  }
+
+  // مقداردهی اولیه
+  displayComments(1);
+});
+
+
+
+
     
 document.addEventListener('DOMContentLoaded', function() {
   // داده‌های اولیه نظرات
@@ -451,6 +534,15 @@ document.addEventListener('click', function(e) {
       const priceValue = document.getElementById('priceValue');
       const applyPriceFilter = document.getElementById('applyPriceFilter');
       
+
+      // قبل از اضافه کردن event listener، وجود المنت را بررسی کنید
+const element = document.getElementById('elementId');
+if (element) {
+  element.addEventListener('click', function() {
+    // کدهای شما
+  });
+}
+
       priceRange.addEventListener('input', function() {
         priceValue.textContent = new Intl.NumberFormat('fa-IR').format(this.value) + ' تومان';
       });
