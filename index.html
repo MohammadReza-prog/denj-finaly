@@ -29,30 +29,24 @@
   </style>
 </head>
 <body>
-  <script>
-    // این کد را در ابتدای <body> یا قبل از بسته شدن </body> قرار دهید
-document.addEventListener('DOMContentLoaded', function() {
-  // 1. فوراً اسکرول را به بالا ببرید
-  window.scrollTo(0, 0);
-  
-  // 2. از ذخیره موقعیت اسکرول توسط مرورگر جلوگیری کنید
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-  
-  // 3. هر هش موجود در URL را حذف کنید
-  if (window.location.hash) {
-    history.replaceState(null, null, ' ');
-  }
-  
-  // 4. پس از لود کامل صفحه دوباره موقعیت را چک کنید
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      window.scrollTo(0, 0);
-    }, 100);
-  });
-});
-  </script>
+  <!-- Loader -->
+<!-- Coffee Loader -->
+<div id="coffee-loader">
+  <div class="cup">
+    <div class="coffee">
+      <div class="bubble bubble1"></div>
+      <div class="bubble bubble2"></div>
+      <div class="bubble bubble3"></div>
+    </div>
+    <div class="steam steam1"></div>
+    <div class="steam steam2"></div>
+    <div class="steam steam3"></div>
+  </div>
+  <p>☕ در حال دم کردن قهوه ...</p>
+</div>
+
+
+
 
   <section id="home">
     
@@ -164,17 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </div>
       
-      <!-- فیلتر قیمت -->
-      <!-- <div class="price-filter">
-        <h4>فیلتر بر اساس قیمت</h4>
-        <input type="range" id="priceRange" min="50000" max="200000" step="10000" value="200000">
-        <div class="d-flex justify-content-between">
-          <span>50,000 تومان</span>
-          <span id="priceValue">200,000 تومان</span>
-        </div>
-        <button id="applyPriceFilter" class="btn">اعمال فیلتر</button>
-      </div>
-       -->
+     
       <div class="category-tabs-container">
         <!-- تب‌های عمودی -->
         <div class="category-tabs-vertical">

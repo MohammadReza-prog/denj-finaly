@@ -537,35 +537,9 @@ if (element) {
   });
 }
 
-      priceRange.addEventListener('input', function() {
-        priceValue.textContent = new Intl.NumberFormat('fa-IR').format(this.value) + ' تومان';
-      });
       
-      applyPriceFilter.addEventListener('click', function() {
-        const maxPrice = parseInt(priceRange.value);
-        const activeFilter = document.querySelector('.category-tabs-vertical button.active').dataset.filter;
-        let visibleItems = 0;
-        
-        menuItems.forEach(item => {
-          const priceText = item.querySelector('.price-row span').textContent;
-          const price = parseInt(priceText.replace(/,/g, ''));
-          const matchesFilter = activeFilter === 'all' || item.classList.contains(activeFilter);
-          
-          if (price <= maxPrice && matchesFilter) {
-            item.style.display = 'block';
-            visibleItems++;
-          } else {
-            item.style.display = 'none';
-          }
-          
-          // بررسی تعداد آیتم‌های نمایش داده شده
-          if (visibleItems === 1) {
-            item.classList.add('single-item');
-          } else {
-            item.classList.remove('single-item');
-          }
-        });
-      });
+      
+  
 
       
       // پیام خوش‌آمدگویی
@@ -628,9 +602,9 @@ document.querySelectorAll('.navbar-collapse .nav-link').forEach(link => {
     }
   });
 });
- window.addEventListener("load", function () {
-    document.querySelector(".coffee-loader").style.display = "none";
-  });
+//  window.addEventListener("load", function () {
+//     document.querySelector(".coffee-loader").style.display = "none";
+//   });
 
 // فعال کردن گالری استوری پس از لود کامل صفحه
 document.addEventListener('DOMContentLoaded', function() {
@@ -720,10 +694,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // مقداردهی اولیه
-document.addEventListener('DOMContentLoaded', () => {
-  displayComments(currentPage);
-  setupPagination();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   displayComments(currentPage);
+//   setupPagination();
+// });
 // این کد را به اسکریپت موجود اضافه کنید
 document.addEventListener('DOMContentLoaded', function() {
   const thumbnailsContainer = document.querySelector('.story-thumbnails');
@@ -758,3 +732,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 // داده محصولات
  // داده‌های نمونه برای نظرات
+// محو کردن لودر بعد از لود کامل
+window.addEventListener('load', () => {
+  const loader = document.getElementById('coffee-loader');
+  if (loader) {
+    loader.style.opacity = '0';
+    loader.style.transition = 'opacity 0.8s ease';
+    setTimeout(() => loader.style.display = 'none', 800);
+  }
+});
