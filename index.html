@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 
   <!-- هدر -->
-  <header class="hero text-white d-flex align-items-center justify-content-center animate__animated animate__fadeIn" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('picture/bg.jpg'); height: 60vh; background-size: cover; background-position: center;">
+  <header class="hero text-white d-flex align-items-center justify-content-center animate__animated animate__fadeIn style-9 ">
     <div class="text-center">
       <h1  class="display-4 fw-bold mb-4">به کافه‌ دنج خوش آمدید</h1>
       <p class="lead fs-4">تجربه‌ای متفاوت از طعم‌های اصیل</p>
@@ -584,12 +584,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- بخش نظرات -->
 <section id="comments" class="py-5 ">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold" style="color: var(--text-color);">نظرات مهمانان</h2>
+    <h2 class="text-center mb-5 fw-bold style-10
+    " >نظرات شما</h2>
     
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <!-- کارت نمایش نظرات -->
-        <div class="card comments-card mb-4" style="background: var(--card-bg); border-color: var(--input-border);">
+        <div class="card comments-card mb-4 style-11 ">
           <div class="card-body">
             <!-- نمایش امتیاز -->
             <div class="rating-display mb-3">
@@ -599,20 +600,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 <i class="fas fa-coffee"></i>
                 <i class="far fa-coffee"></i>
               </div>
-              <small class="ms-2" style="color: var(--text-color);">(امتیاز 3 از 4)</small>
+              <small class="ms-2" ">(امتیاز 3 از 4)</small>
             </div>
             
             <!-- متن نظر -->
-            <p class="comment-text mb-3" style="color: var(--text-color);">این کافه فضای بسیار دنج و آرامی دارد. قهوه‌هایشان عالی است و پرسنل خوش‌برخورد. حتماً دوباره می‌آیم!</p>
+            <p class="comment-text mb-3 style-12 ">این کافه فضای بسیار دنج و آرامی دارد. قهوه‌هایشان عالی است و پرسنل خوش‌برخورد. حتماً دوباره می‌آیم!</p>
             
             <!-- اطلاعات کاربر -->
             <div class="user-info d-flex align-items-center">
               <div class="avatar me-3">
-                <i class="fas fa-user-circle fa-3x" style="color: var(--primary-color);"></i>
+                <i class="fas fa-user-circle fa-3x style-13"></i>
               </div>
               <div>
-                <h6 class="mb-0" style="color: var(--text-color);">محمد رضایی</h6>
-                <small class="text-muted" style="color: var(--text-color) !important;">۲ روز پیش</small>
+                <h6 class="mb-0 style-14">محمد رضایی</h6>
+                <small class="text-muted style-15">۲ روز پیش</small>
               </div>
             </div>
           </div>
@@ -623,32 +624,32 @@ document.addEventListener('DOMContentLoaded', function() {
           <button class="btn btn-outline-secondary prev-comment" disabled>
             <i class="fas fa-chevron-right me-2"></i> نظر قبلی
           </button>
-          <span class="page-indicator" style="color: var(--text-color);">نظر 1 از 5</span>
+          <span class="page-indicator style-16 ">نظر 1 از 5</span>
           <button class="btn btn-outline-secondary next-comment">
             نظر بعدی <i class="fas fa-chevron-left ms-2"></i>
           </button>
         </div>
         
         <!-- فرم ارسال نظر -->
-        <div class="card comment-form-card" style="background: var(--card-bg); border-color: var(--input-border);">
-          <div class="card-header" style="background: var(--primary-color); color: var(--text-light);">
+        <div class="card comment-form-card style-17">
+          <div class="card-header style-18">
             <h5 class="mb-0">ثبت نظر جدید</h5>
           </div>
           <div class="card-body">
             <form id="commentForm">
               <!-- انتخاب جنسیت -->
               <div class="gender-selection mb-4">
-                <label class="form-label" style="color: var(--text-color);">جنسیت:</label>
+                <label class="form-label style-19 ">جنسیت:</label>
                 <div class="d-flex">
                   <div class="form-check me-4">
                     <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
-                    <label class="form-check-label d-flex align-items-center" for="male" style="color: var(--text-color);">
+                    <label class="form-check-label d-flex align-items-center style-20 " for="male">
                       <i class="fas fa-male me-2 fa-lg"></i> آقا
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="gender" id="female" value="female">
-                    <label class="form-check-label d-flex align-items-center" for="female" style="color: var(--text-color);">
+                    <label class="form-check-label d-flex align-items-center style-21 " for="female">
                       <i class="fas fa-female me-2 fa-lg"></i> خانم
                     </label>
                   </div>
@@ -657,13 +658,13 @@ document.addEventListener('DOMContentLoaded', function() {
               
               <!-- نام کاربر -->
               <div class="mb-3">
-                <label for="name" class="form-label" style="color: var(--text-color);">نام شما</label>
-                <input type="text" class="form-control" id="name" required style="background: var(--input-bg); color: var(--text-color); border-color: var(--input-border);">
+                <label for="name" class="form-label style-22">نام شما</label>
+                <input type="text" class="form-control style-23 " id="name" required >
               </div>
               
               <!-- امتیازدهی با فنجان قهوه -->
               <div class="mb-4">
-                <label class="form-label" style="color: var(--text-color);">امتیاز شما:</label>
+                <label class="form-label style-24 " >امتیاز شما:</label>
                 <div class="coffee-rating">
                   <input type="radio" id="cup5" name="rating" value="5">
                   <label for="cup5" title="عالی"><i class="fas fa-coffee"></i></label>
@@ -680,12 +681,12 @@ document.addEventListener('DOMContentLoaded', function() {
               
               <!-- متن نظر -->
               <div class="mb-3">
-                <label for="comment" class="form-label" style="color: var(--text-color);">نظر شما</label>
-                <textarea class="form-control" id="comment" rows="3" required style="background: var(--input-bg); color: var(--text-color); border-color: var(--input-border);"></textarea>
+                <label for="comment" class="form-label style-25 " >نظر شما</label>
+                <textarea class="form-control style-26 " id="comment" rows="3" required ></textarea>
               </div>
               
               <!-- دکمه ارسال -->
-              <button type="submit" class="btn btn-primary w-100 py-2" style="background: var(--primary-color); border: none; font-weight: 600;">
+              <button type="submit" class="btn btn-primary w-100 py-2 style-27">
                 <i class="fas fa-paper-plane me-2"></i> ارسال نظر
               </button>
             </form>
@@ -696,14 +697,14 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
   <!-- پاورقی -->
- <footer class="footer-section " style="background: var(--footer-bg); color: white; overflow: hidden;">
+ <footer class="footer-section style-28 ">
   <div class="container py-5">
     <div class="row g-4">
       <!-- ستون لوگو و توضیحات -->
       <div class="col-lg-3 col-md-6">
         <div class="footer-logo">
           <a href="#" class="d-flex align-items-center mb-3 text-decoration-none">
-            <span class="denj fs-3 fw-bold" style="color: var(--secondary-color);">کافه دنج</span>
+            <span class="denj fs-3 fw-bold style-29 ">کافه دنج</span>
           </a>
           <p class="footer-description">
             کافه دنج، فضایی آرام و دلنشین برای تجربه بهترین طعم‌های قهوه و غذاهای لذیذ در قلب هشتگرد.
@@ -733,12 +734,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <h5 class="footer-title mb-4">ساعات کاری</h5>
         <ul class="footer-hours list-unstyled">
           <li class="d-flex align-items-center mb-2">
-            <i class="far fa-clock me-2" style="color: var(--secondary-color);"></i>
+            <i class="far fa-clock me-2 style-32 "></i>
             <span><b>8 صبح تا 12 شب</b></span>
           </li>
           
           <li class="d-flex align-items-center">
-            <i class="fas fa-coffee me-2" style="color: var(--secondary-color);"></i>
+            <i class="fas fa-coffee me-2 style-33"></i>
             <span>همه‌روز آماده خدمات رسانی هستیم!</span>
           </li>
         </ul>
@@ -760,13 +761,13 @@ document.addEventListener('DOMContentLoaded', function() {
         </form>
 
         <div class="footer-map mt-4">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229.4391287205217!2d50.67467447434334!3d35.96068811457447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8d01c3cd67d8e9%3A0xe8802997fcee0a7f!2z2KjYp9i6INiv2YbYrA!5e0!3m2!1sen!2s!4v1702235487954!5m2!1sen!2s" style="border:0; width: 100%; height: 350px;" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="img-fluid rounded shadow" style="border: 2px solid var(--secondary-color);"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229.4391287205217!2d50.67467447434334!3d35.96068811457447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8d01c3cd67d8e9%3A0xe8802997fcee0a7f!2z2KjYp9i6INiv2YbYrA!5e0!3m2!1sen!2s!4v1702235487954!5m2!1sen!2s"  frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="img-fluid rounded shadow style-34 "></iframe>
         </div>
       </div>
     </div>
 
     <!-- خط جداکننده -->
-    <hr class="footer-divider my-4" style="border-color: rgba(255,255,255,0.1);">
+    <hr class="footer-divider my-4 style-35 ">
 
     <!-- کپی رایت -->
     <div class="row">

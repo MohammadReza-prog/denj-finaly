@@ -94,17 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
       // کدهای نمایش کامنت‌ها
       console.log(`نمایش کامنت‌های صفحه ${page}`);
     } else {
-      console.error('محفظه کامنت‌ها یافت نشد!');
+    
     }
   }
 
-  // 2. مدیریت event listeners
-  const clickableElement = document.getElementById('myButton');
-  if (clickableElement) {
-    clickableElement.addEventListener('click', function() {
-      console.log('دکمه کلیک شد!');
-    });
-  }
+  
 
   // 3. مدیریت استایل عناصر
   const styledElement = document.querySelector('.element-to-style');
